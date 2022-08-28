@@ -108,7 +108,7 @@ int main3()
 	return 0;
 }
 //EX4
-int main()
+int main4()
 {
 	int nums[15];
 	int numnum = 11;
@@ -120,6 +120,68 @@ int main()
 	FILE* f = fopen("EX4.bin", "w");
 	fwrite(&nums, sizeof(int), 15, f);
 	fclose(f);
+
+	return 0;
+}
+//קיראו int אחר int
+//והדפיסו את המערך , את סכומו וכמה איברים היו בקובץ
+//EX5
+int main5()
+{
+	int num;
+	int sum = 0;
+	int numofnum = 0;
+	FILE* f = fopen("C:\\Users\\nuhah\\Downloads\\exc4.bin", "r");
+	while (fread(&num , sizeof(int),1,f))
+	{
+		printf("the num is %d\n", num);
+		sum += num;
+		numofnum++;
+
+	}
+	printf("the SUM is %d\n there is %d numbers", sum, numofnum);
+
+	return 0;
+}
+
+int main()
+{
+	struct qquestion
+	{
+		int val;
+		char name[100];
+		short answer;
+	};
+	int numofarr;
+	int valnum = 0;
+	scanf("%d", &numofarr);
+	struct qquestion* start;
+	struct qquestion* corrent;
+	corrent = malloc(sizeof(struct qquestion) * numofarr);
+	start = corrent;
+	for (int i = 0; i < numofarr; i++)
+	{
+		scanf(" %s %d", corrent->name, &corrent->val);
+		
+		if (corrent->val > 10 && strlen(corrent->name) > 5)
+		{
+			corrent->answer = 1;
+		}
+		else
+		{
+			corrent->answer = 0;
+		}
+		valnum += corrent->val;
+		if (i != numofarr - 1)
+		{
+			corrent++;
+		}
+	}
+	FILE* f = fopen("EX6.bin", "w");
+	fwrite(start, sizeof(struct qquestion), numofarr, f);
+	fclose(f);
+	free(start);
+	printf("the sum of val is %d", valnum);
 
 	return 0;
 }
